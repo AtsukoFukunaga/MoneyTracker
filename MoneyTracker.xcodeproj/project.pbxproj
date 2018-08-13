@@ -12,6 +12,10 @@
 		A1E440B72121285000D5A961 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A1E440B52121285000D5A961 /* Main.storyboard */; };
 		A1E440B92121285100D5A961 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A1E440B82121285100D5A961 /* Assets.xcassets */; };
 		A1E440BC2121285100D5A961 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A1E440BA2121285100D5A961 /* LaunchScreen.storyboard */; };
+		A1E440C4212129EF00D5A961 /* DateCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1E440C3212129EF00D5A961 /* DateCollectionViewCell.swift */; };
+		A1E440C621212A3A00D5A961 /* CalendarVars.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1E440C521212A3A00D5A961 /* CalendarVars.swift */; };
+		A1E440C8212130D900D5A961 /* StoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1E440C7212130D900D5A961 /* StoreViewController.swift */; };
+		A1E440CA212130FA00D5A961 /* ItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1E440C9212130FA00D5A961 /* ItemViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +26,10 @@
 		A1E440B82121285100D5A961 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A1E440BB2121285100D5A961 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A1E440BD2121285100D5A961 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A1E440C3212129EF00D5A961 /* DateCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateCollectionViewCell.swift; sourceTree = "<group>"; };
+		A1E440C521212A3A00D5A961 /* CalendarVars.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarVars.swift; sourceTree = "<group>"; };
+		A1E440C7212130D900D5A961 /* StoreViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreViewController.swift; sourceTree = "<group>"; };
+		A1E440C9212130FA00D5A961 /* ItemViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,13 +63,49 @@
 			isa = PBXGroup;
 			children = (
 				A1E440B12121285000D5A961 /* AppDelegate.swift */,
-				A1E440B32121285000D5A961 /* ViewController.swift */,
-				A1E440B52121285000D5A961 /* Main.storyboard */,
-				A1E440B82121285100D5A961 /* Assets.xcassets */,
-				A1E440BA2121285100D5A961 /* LaunchScreen.storyboard */,
+				A1E440CB212131B900D5A961 /* Controllers */,
+				A1E440CC212131EA00D5A961 /* Data Model */,
+				A1E440CD212131F300D5A961 /* View */,
+				A1E440CE212131FD00D5A961 /* Support Files */,
 				A1E440BD2121285100D5A961 /* Info.plist */,
 			);
 			path = MoneyTracker;
+			sourceTree = "<group>";
+		};
+		A1E440CB212131B900D5A961 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				A1E440B32121285000D5A961 /* ViewController.swift */,
+				A1E440C7212130D900D5A961 /* StoreViewController.swift */,
+				A1E440C9212130FA00D5A961 /* ItemViewController.swift */,
+				A1E440C3212129EF00D5A961 /* DateCollectionViewCell.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		A1E440CC212131EA00D5A961 /* Data Model */ = {
+			isa = PBXGroup;
+			children = (
+				A1E440C521212A3A00D5A961 /* CalendarVars.swift */,
+			);
+			path = "Data Model";
+			sourceTree = "<group>";
+		};
+		A1E440CD212131F300D5A961 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				A1E440B52121285000D5A961 /* Main.storyboard */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		A1E440CE212131FD00D5A961 /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				A1E440B82121285100D5A961 /* Assets.xcassets */,
+				A1E440BA2121285100D5A961 /* LaunchScreen.storyboard */,
+			);
+			path = "Support Files";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -135,8 +179,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A1E440C8212130D900D5A961 /* StoreViewController.swift in Sources */,
 				A1E440B42121285000D5A961 /* ViewController.swift in Sources */,
+				A1E440C4212129EF00D5A961 /* DateCollectionViewCell.swift in Sources */,
 				A1E440B22121285000D5A961 /* AppDelegate.swift in Sources */,
+				A1E440C621212A3A00D5A961 /* CalendarVars.swift in Sources */,
+				A1E440CA212130FA00D5A961 /* ItemViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
