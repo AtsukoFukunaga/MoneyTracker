@@ -14,7 +14,6 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     @IBOutlet weak var monthLabel: UILabel!
     
     let months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
-    //    let dayOfMonth = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
     var daysInMonth = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
     
     var currentMonth: String = ""
@@ -26,11 +25,8 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     var positionIndex = 0
     
     var dayCounter = 0
-    
+
     var selectedDate: String = ""
-    
-    
-//    var highlightDate = -1
     
     
     override func viewDidLoad() {
@@ -45,8 +41,6 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     
     
     @IBAction func nextButtonPressed(_ sender: Any) {
-        
-//        highlightDate = -1
         
         switch currentMonth {
             
@@ -75,8 +69,6 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     
     
     @IBAction func backButtonPressed(_ sender: Any) {
-        
-//        highlightDate = -1
         
         switch currentMonth {
             
@@ -217,10 +209,6 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
             cell.dateLabel.backgroundColor = UIColor.clear
         }
         
-//        if indexPath.row == highlightDate {
-//            cell.backgroundColor = UIColor.lightGray
-//        }
-        
         return cell
         
     }
@@ -228,24 +216,22 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
-//        highlightDate = indexPath.row
-//        calendarCollectionView.reloadData()
-        
-        selectedDate = "\(year)-\(month)-\(indexPath.row - positionIndex + 1)"
-        
         performSegue(withIdentifier: "goToStores", sender: self)
         
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        
+
         let destinationVC = segue.destination as! StoreViewController
-        
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-M-d"
-        let date = dateFormatter.date(from: selectedDate)
-        destinationVC.selectedDate = date
-        
+
+        if let indexPath = calendarCollectionView.indexPathsForSelectedItems?.first {
+
+            if (indexPath.row - positionIndex + 1) > 0 {
+                selectedDate = "\(year)-\(month)-\(indexPath.row - positionIndex + 1)"
+                print(selectedDate)
+                destinationVC.selectedDate = selectedDate
+            }
+        }
     }
     
 }

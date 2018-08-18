@@ -7,24 +7,22 @@
 //
 
 import UIKit
-import CoreData
+import RealmSwift
 
 class StoreViewController: UITableViewController {
     
-    var storeArray = [Store]()
+    let realm = try! Realm()
     
-    var selectedDate: Date? {
+    var storeArray: Results<Store>?
+    
+    var selectedDate: String? {
         didSet{
             loadStores()
         }
     }
 
-    let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        print(FileManager.default.urls(for: .documentDirectory, in: .userDomainMask))
 
     }
 
@@ -33,14 +31,14 @@ class StoreViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 
-        return storeArray.count
+        return storeArray?.count ?? 1
         
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "StoreTableCell", for: indexPath)
-        cell.textLabel?.text = storeArray[indexPath.row].storeName
+        cell.textLabel?.text = storeArray?[indexPath.row].storeName ?? "No stores added yet"
         
         return cell
         
@@ -53,13 +51,6 @@ class StoreViewController: UITableViewController {
         
         performSegue(withIdentifier: "goToItems", sender: self)
         
-//        context.delete(storeArray[indexPath.row])
-//        storeArray.remove(at: indexPath.row)
-//
-//        saveStores()
-        
-        tableView.deselectRow(at: indexPath, animated: true)
-        
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -67,7 +58,7 @@ class StoreViewController: UITableViewController {
         let destinationVC = segue.destination as! ItemViewController
         
         if let indexPath = tableView.indexPathForSelectedRow {
-            destinationVC.selectedStore = storeArray[indexPath.row]
+            destinationVC.selectedStore = storeArray?[indexPath.row]
         }
     }
     
@@ -81,12 +72,11 @@ class StoreViewController: UITableViewController {
         let alert = UIAlertController(title: "Add New Store", message: "", preferredStyle: .alert)
         let action = UIAlertAction(title: "Add Store", style: .default) { (action) in
             
-            let newStore = Store(context: self.context)
+            let newStore = Store()
             newStore.storeName = textField.text!
-            newStore.shoppingDate = self.selectedDate
+            newStore.shoppingDate = self.selectedDate!
             
-            self.storeArray.append(newStore)
-            self.saveStores()
+            self.saveStores(store: newStore)
             
         }
         
@@ -107,10 +97,12 @@ class StoreViewController: UITableViewController {
     
     // MARK: - Model Manupulation Methods
     
-    func saveStores() {
+    func saveStores(store: Store) {
 
         do {
-            try context.save()
+            try realm.write {
+                realm.add(store)
+            }
         } catch {
             print("Error saving context, \(error)")
         }
@@ -119,17 +111,10 @@ class StoreViewController: UITableViewController {
     }
     
     
-    func loadStores(with request: NSFetchRequest<Store> = Store.fetchRequest()) {
+    func loadStores() {
         
-        let predicate = NSPredicate(format: "Store.shoppingDate MATCHES %@", selectedDate! as CVarArg)
-        request.predicate = predicate
+        storeArray = realm.objects(Store.self).filter("shoppingDate == %@", selectedDate!)
         
-        do {
-            storeArray = try context.fetch(request)
-        } catch {
-            print("Error fetching data from context \(error)")
-        }
     }
-    
 
 }

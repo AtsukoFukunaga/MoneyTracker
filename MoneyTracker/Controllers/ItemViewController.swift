@@ -7,11 +7,12 @@
 //
 
 import UIKit
-import CoreData
+import RealmSwift
 
 class ItemViewController: UITableViewController {
     
-    var itemArray = [Item]()
+    var storeItems: Results<Item>?
+    let realm = try! Realm()
     
     var selectedStore: Store? {
         didSet{
@@ -19,8 +20,6 @@ class ItemViewController: UITableViewController {
         }
     }
     
-    let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -31,26 +30,35 @@ class ItemViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        return itemArray.count
+        return storeItems?.count ?? 1
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "ItemTableCell", for: indexPath)
-        cell.textLabel?.text = itemArray[indexPath.row].item
-        var amount: Double = 0.00
-        if itemArray[indexPath.row].expense != 0 {
-            amount = itemArray[indexPath.row].expense
-        } else {
-            amount = itemArray[indexPath.row].income
+        
+        if let item = storeItems?[indexPath.row] {
+            cell.textLabel?.text = item.item
+            var amount: Int = 0
+            if item.expense != 0 {
+                amount = item.expense
+            } else {
+                amount = item.income
+            }
+            cell.detailTextLabel?.text = String(amount)
         }
-        cell.detailTextLabel?.text = String(amount)
         
         return cell
     }
     
     
     // MARK: - TableView Delegate Methods
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        tableView.deselectRow(at: indexPath, animated: true)
+        
+    }
     
     
     // MARK: - Add New Items
@@ -60,14 +68,22 @@ class ItemViewController: UITableViewController {
         let alert = UIAlertController(title: "Add New Item", message: "", preferredStyle: .alert)
         let action = UIAlertAction(title: "Add Item", style: .default) { (action) in
             
-            let newItem = Item(context: self.context)
-            newItem.item = alert.textFields![0].text
-            newItem.expense = Double(alert.textFields![1].text!)! * -1.00
-            newItem.income = Double(alert.textFields![2].text!)! * 1.00
-            newItem.parentCategory = self.selectedStore
+            if let currentStore = self.selectedStore {
+                do {
+                    try self.realm.write {
+                        let newItem = Item()
+                        newItem.dateCreated = Date()
+                        newItem.item = alert.textFields![0].text!
+                        newItem.expense = Int(alert.textFields![1].text!)! * -1
+                        newItem.income = Int(alert.textFields![2].text!)!
+                        currentStore.items.append(newItem)
+                    }
+                } catch {
+                    print("Error saving new items, \(error)")
+                }
+            }
             
-            self.itemArray.append(newItem)
-            self.saveItems()
+            self.tableView.reloadData()
             
         }
         
@@ -94,28 +110,10 @@ class ItemViewController: UITableViewController {
     
     // MARK: - Data Manipulation Methods
     
-    func saveItems() {
+    func loadItems() {
         
-        do {
-            try context.save()
-        } catch {
-            print("Error saving context, \(error)")
-        }
+        storeItems = selectedStore?.items.sorted(byKeyPath: "dateCreated", ascending: true)
         
-        tableView.reloadData()
-    }
-    
-    
-    func loadItems(with request: NSFetchRequest<Item> = Item.fetchRequest()) {
-        
-        let predicate = NSPredicate(format: "parenetCategory.storeName MATCHES %@", selectedStore!.items!)
-        request.predicate = predicate
-        
-        do {
-            itemArray = try context.fetch(request)
-        } catch {
-            print("Error fetching data from context \(error)")
-        }
     }
     
 }

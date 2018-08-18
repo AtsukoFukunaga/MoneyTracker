@@ -7,7 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		A152C2CC2125483F00F3232F /* DataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A152C2CA2125483F00F3232F /* DataModel.xcdatamodeld */; };
+		A13558352127BECC00571DC8 /* Store.swift in Sources */ = {isa = PBXBuildFile; fileRef = A13558342127BECC00571DC8 /* Store.swift */; };
+		A13558372127BEE000571DC8 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = A13558362127BEE000571DC8 /* Item.swift */; };
 		A1E440B22121285000D5A961 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1E440B12121285000D5A961 /* AppDelegate.swift */; };
 		A1E440B42121285000D5A961 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1E440B32121285000D5A961 /* ViewController.swift */; };
 		A1E440B72121285000D5A961 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A1E440B52121285000D5A961 /* Main.storyboard */; };
@@ -22,7 +23,8 @@
 
 /* Begin PBXFileReference section */
 		1C93CCFEB3BCBB7E994E8FF5 /* Pods-MoneyTracker.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MoneyTracker.release.xcconfig"; path = "Pods/Target Support Files/Pods-MoneyTracker/Pods-MoneyTracker.release.xcconfig"; sourceTree = "<group>"; };
-		A152C2CB2125483F00F3232F /* DataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DataModel.xcdatamodel; sourceTree = "<group>"; };
+		A13558342127BECC00571DC8 /* Store.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Store.swift; sourceTree = "<group>"; };
+		A13558362127BEE000571DC8 /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
 		A1E440AE2121285000D5A961 /* MoneyTracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MoneyTracker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A1E440B12121285000D5A961 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A1E440B32121285000D5A961 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -112,8 +114,9 @@
 		A1E440CC212131EA00D5A961 /* Data Model */ = {
 			isa = PBXGroup;
 			children = (
-				A152C2CA2125483F00F3232F /* DataModel.xcdatamodeld */,
 				A1E440C521212A3A00D5A961 /* CalendarVars.swift */,
+				A13558342127BECC00571DC8 /* Store.swift */,
+				A13558362127BEE000571DC8 /* Item.swift */,
 			);
 			path = "Data Model";
 			sourceTree = "<group>";
@@ -249,9 +252,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A152C2CC2125483F00F3232F /* DataModel.xcdatamodeld in Sources */,
+				A13558372127BEE000571DC8 /* Item.swift in Sources */,
 				A1E440C8212130D900D5A961 /* StoreViewController.swift in Sources */,
 				A1E440B42121285000D5A961 /* ViewController.swift in Sources */,
+				A13558352127BECC00571DC8 /* Store.swift in Sources */,
 				A1E440C4212129EF00D5A961 /* DateCollectionViewCell.swift in Sources */,
 				A1E440B22121285000D5A961 /* AppDelegate.swift in Sources */,
 				A1E440C621212A3A00D5A961 /* CalendarVars.swift in Sources */,
@@ -455,19 +459,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCVersionGroup section */
-		A152C2CA2125483F00F3232F /* DataModel.xcdatamodeld */ = {
-			isa = XCVersionGroup;
-			children = (
-				A152C2CB2125483F00F3232F /* DataModel.xcdatamodel */,
-			);
-			currentVersion = A152C2CB2125483F00F3232F /* DataModel.xcdatamodel */;
-			path = DataModel.xcdatamodeld;
-			sourceTree = "<group>";
-			versionGroupType = wrapper.xcdatamodel;
-		};
-/* End XCVersionGroup section */
 	};
 	rootObject = A1E440A62121285000D5A961 /* Project object */;
 }
