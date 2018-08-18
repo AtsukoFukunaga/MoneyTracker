@@ -18,6 +18,7 @@
 		A1E440C621212A3A00D5A961 /* CalendarVars.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1E440C521212A3A00D5A961 /* CalendarVars.swift */; };
 		A1E440C8212130D900D5A961 /* StoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1E440C7212130D900D5A961 /* StoreViewController.swift */; };
 		A1E440CA212130FA00D5A961 /* ItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1E440C9212130FA00D5A961 /* ItemViewController.swift */; };
+		A1E4F7862128C23F001BF29A /* AddItemsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1E4F7852128C23F001BF29A /* AddItemsViewController.swift */; };
 		B57541A1D83F2A609E2CA4BA /* Pods_MoneyTracker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FAD2CFEA94B33517033FD368 /* Pods_MoneyTracker.framework */; };
 /* End PBXBuildFile section */
 
@@ -36,6 +37,7 @@
 		A1E440C521212A3A00D5A961 /* CalendarVars.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarVars.swift; sourceTree = "<group>"; };
 		A1E440C7212130D900D5A961 /* StoreViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreViewController.swift; sourceTree = "<group>"; };
 		A1E440C9212130FA00D5A961 /* ItemViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemViewController.swift; sourceTree = "<group>"; };
+		A1E4F7852128C23F001BF29A /* AddItemsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddItemsViewController.swift; sourceTree = "<group>"; };
 		E39CD936219A4F31605F5B11 /* Pods-MoneyTracker.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MoneyTracker.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MoneyTracker/Pods-MoneyTracker.debug.xcconfig"; sourceTree = "<group>"; };
 		FAD2CFEA94B33517033FD368 /* Pods_MoneyTracker.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MoneyTracker.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -107,6 +109,7 @@
 				A1E440C3212129EF00D5A961 /* DateCollectionViewCell.swift */,
 				A1E440C7212130D900D5A961 /* StoreViewController.swift */,
 				A1E440C9212130FA00D5A961 /* ItemViewController.swift */,
+				A1E4F7852128C23F001BF29A /* AddItemsViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -256,6 +259,7 @@
 				A1E440C8212130D900D5A961 /* StoreViewController.swift in Sources */,
 				A1E440B42121285000D5A961 /* ViewController.swift in Sources */,
 				A13558352127BECC00571DC8 /* Store.swift in Sources */,
+				A1E4F7862128C23F001BF29A /* AddItemsViewController.swift in Sources */,
 				A1E440C4212129EF00D5A961 /* DateCollectionViewCell.swift in Sources */,
 				A1E440B22121285000D5A961 /* AppDelegate.swift in Sources */,
 				A1E440C621212A3A00D5A961 /* CalendarVars.swift in Sources */,

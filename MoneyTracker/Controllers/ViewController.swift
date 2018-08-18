@@ -203,7 +203,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
             cell.dateLabel.textColor = UIColor.black
         }
         
-        if currentMonth == months[calendar.component(.month, from: date) - 1] && year == calendar.component(.year, from: date) && day == indexPath.row + 1 {
+        if currentMonth == months[calendar.component(.month, from: date) - 1] && year == calendar.component(.year, from: date) && day == indexPath.row - positionIndex + 1 {
             cell.dateLabel.backgroundColor = UIColor.gray
         } else {
             cell.dateLabel.backgroundColor = UIColor.clear

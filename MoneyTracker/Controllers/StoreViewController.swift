@@ -59,6 +59,8 @@ class StoreViewController: UITableViewController {
         
         if let indexPath = tableView.indexPathForSelectedRow {
             destinationVC.selectedStore = storeArray?[indexPath.row]
+            destinationVC.selectedDate = selectedDate
+            
         }
     }
     

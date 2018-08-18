@@ -14,11 +14,14 @@ class ItemViewController: UITableViewController {
     var storeItems: Results<Item>?
     let realm = try! Realm()
     
+    var selectedDate: String?
+    
     var selectedStore: Store? {
         didSet{
             loadItems()
         }
     }
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -62,50 +65,54 @@ class ItemViewController: UITableViewController {
     
     
     // MARK: - Add New Items
-
-    @IBAction func addButtonPressed(_ sender: UIBarButtonItem) {
+    
+    @IBAction func retreiveNewItem(segue: UIStoryboardSegue) {
         
-        let alert = UIAlertController(title: "Add New Item", message: "", preferredStyle: .alert)
-        let action = UIAlertAction(title: "Add Item", style: .default) { (action) in
-            
-            if let currentStore = self.selectedStore {
-                do {
-                    try self.realm.write {
-                        let newItem = Item()
-                        newItem.dateCreated = Date()
-                        newItem.item = alert.textFields![0].text!
-                        newItem.expense = Int(alert.textFields![1].text!)! * -1
-                        newItem.income = Int(alert.textFields![2].text!)!
-                        currentStore.items.append(newItem)
-                    }
-                } catch {
-                    print("Error saving new items, \(error)")
-                }
-            }
-            
-            self.tableView.reloadData()
-            
-        }
-        
-        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
-        
-        alert.addTextField { (alertTextField: UITextField) in
-            alertTextField.placeholder = "Create new item"
-        }
-        alert.addTextField { (alertTextField: UITextField) in
-            alertTextField.keyboardType = .numberPad
-            alertTextField.placeholder = "0"
-        }
-        alert.addTextField { (alertTextField: UITextField) in
-            alertTextField.keyboardType = .numberPad
-            alertTextField.placeholder = "0"
-        }
-        
-        alert.addAction(action)
-        alert.addAction(cancelAction)
-        
-        present(alert, animated: true, completion: nil)
     }
+
+//    @IBAction func addButtonPressed(_ sender: UIBarButtonItem) {
+//
+////        let alert = UIAlertController(title: "Add New Item", message: "", preferredStyle: .alert)
+////        let action = UIAlertAction(title: "Add Item", style: .default) { (action) in
+////
+////            if let currentStore = self.selectedStore {
+////                do {
+////                    try self.realm.write {
+////                        let newItem = Item()
+////                        newItem.dateCreated = Date()
+////                        newItem.item = alert.textFields![0].text!
+////                        newItem.expense = Int(alert.textFields![1].text!)! * -1
+////                        newItem.income = Int(alert.textFields![2].text!)!
+////                        currentStore.items.append(newItem)
+////                    }
+////                } catch {
+////                    print("Error saving new items, \(error)")
+////                }
+////            }
+////            
+////            self.tableView.reloadData()
+////
+////        }
+////
+////        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+////
+////        alert.addTextField { (alertTextField: UITextField) in
+////            alertTextField.placeholder = "Create new item"
+////        }
+////        alert.addTextField { (alertTextField: UITextField) in
+////            alertTextField.keyboardType = .numberPad
+////            alertTextField.placeholder = "0"
+////        }
+////        alert.addTextField { (alertTextField: UITextField) in
+////            alertTextField.keyboardType = .numberPad
+////            alertTextField.placeholder = "0"
+////        }
+////
+////        alert.addAction(action)
+////        alert.addAction(cancelAction)
+////
+////        present(alert, animated: true, completion: nil)
+//    }
     
     
     // MARK: - Data Manipulation Methods
