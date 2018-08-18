@@ -252,7 +252,7 @@
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="Czg-9T-kCb">
                             <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <connections>
-                                <action selector="AddStoreButtonPressed:" destination="4Ye-dN-kmd" id="pEI-Zk-hnd"/>
+                                <action selector="addStoreButtonPressed:" destination="4Ye-dN-kmd" id="bre-mL-J1T"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -290,6 +290,9 @@
                     <navigationItem key="navigationItem" title="Items" id="sns-fo-HT0">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="CKD-xo-UEK">
                             <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <connections>
+                                <action selector="addButtonPressed:" destination="Isr-Se-7s5" id="6VH-us-x62"/>
+                            </connections>
                         </barButtonItem>
                     </navigationItem>
                 </tableViewController>

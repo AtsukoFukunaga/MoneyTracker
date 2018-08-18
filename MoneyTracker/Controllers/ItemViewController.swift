@@ -7,89 +7,115 @@
 //
 
 import UIKit
+import CoreData
 
 class ItemViewController: UITableViewController {
+    
+    var itemArray = [Item]()
+    
+    var selectedStore: Store? {
+        didSet{
+            loadItems()
+        }
+    }
+    
+    let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-
-    // MARK: - Table view data source
-
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 0
-    }
-
+    
+    
+    // MARK: - TableView Datasource Methods
+    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        return 0
+        
+        return itemArray.count
     }
-
-    /*
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
-
-        // Configure the cell...
-
+        
+        let cell = tableView.dequeueReusableCell(withIdentifier: "ItemTableCell", for: indexPath)
+        cell.textLabel?.text = itemArray[indexPath.row].item
+        var amount: Double = 0.00
+        if itemArray[indexPath.row].expense != 0 {
+            amount = itemArray[indexPath.row].expense
+        } else {
+            amount = itemArray[indexPath.row].income
+        }
+        cell.detailTextLabel?.text = String(amount)
+        
         return cell
     }
-    */
+    
+    
+    // MARK: - TableView Delegate Methods
+    
+    
+    // MARK: - Add New Items
 
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
+    @IBAction func addButtonPressed(_ sender: UIBarButtonItem) {
+        
+        let alert = UIAlertController(title: "Add New Item", message: "", preferredStyle: .alert)
+        let action = UIAlertAction(title: "Add Item", style: .default) { (action) in
+            
+            let newItem = Item(context: self.context)
+            newItem.item = alert.textFields![0].text
+            newItem.expense = Double(alert.textFields![1].text!)! * -1.00
+            newItem.income = Double(alert.textFields![2].text!)! * 1.00
+            newItem.parentCategory = self.selectedStore
+            
+            self.itemArray.append(newItem)
+            self.saveItems()
+            
+        }
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        
+        alert.addTextField { (alertTextField: UITextField) in
+            alertTextField.placeholder = "Create new item"
+        }
+        alert.addTextField { (alertTextField: UITextField) in
+            alertTextField.keyboardType = .numberPad
+            alertTextField.placeholder = "0"
+        }
+        alert.addTextField { (alertTextField: UITextField) in
+            alertTextField.keyboardType = .numberPad
+            alertTextField.placeholder = "0"
+        }
+        
+        alert.addAction(action)
+        alert.addAction(cancelAction)
+        
+        present(alert, animated: true, completion: nil)
     }
-    */
-
-    /*
-    // Override to support editing the table view.
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            // Delete the row from the data source
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
+    
+    
+    // MARK: - Data Manipulation Methods
+    
+    func saveItems() {
+        
+        do {
+            try context.save()
+        } catch {
+            print("Error saving context, \(error)")
+        }
+        
+        tableView.reloadData()
     }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
+    
+    
+    func loadItems(with request: NSFetchRequest<Item> = Item.fetchRequest()) {
+        
+        let predicate = NSPredicate(format: "parenetCategory.storeName MATCHES %@", selectedStore!.items!)
+        request.predicate = predicate
+        
+        do {
+            itemArray = try context.fetch(request)
+        } catch {
+            print("Error fetching data from context \(error)")
+        }
     }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
+    
 }

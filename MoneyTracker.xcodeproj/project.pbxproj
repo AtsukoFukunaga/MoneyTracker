@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A152C2CC2125483F00F3232F /* DataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A152C2CA2125483F00F3232F /* DataModel.xcdatamodeld */; };
 		A1E440B22121285000D5A961 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1E440B12121285000D5A961 /* AppDelegate.swift */; };
 		A1E440B42121285000D5A961 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1E440B32121285000D5A961 /* ViewController.swift */; };
 		A1E440B72121285000D5A961 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A1E440B52121285000D5A961 /* Main.storyboard */; };
@@ -16,9 +17,12 @@
 		A1E440C621212A3A00D5A961 /* CalendarVars.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1E440C521212A3A00D5A961 /* CalendarVars.swift */; };
 		A1E440C8212130D900D5A961 /* StoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1E440C7212130D900D5A961 /* StoreViewController.swift */; };
 		A1E440CA212130FA00D5A961 /* ItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1E440C9212130FA00D5A961 /* ItemViewController.swift */; };
+		B57541A1D83F2A609E2CA4BA /* Pods_MoneyTracker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FAD2CFEA94B33517033FD368 /* Pods_MoneyTracker.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1C93CCFEB3BCBB7E994E8FF5 /* Pods-MoneyTracker.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MoneyTracker.release.xcconfig"; path = "Pods/Target Support Files/Pods-MoneyTracker/Pods-MoneyTracker.release.xcconfig"; sourceTree = "<group>"; };
+		A152C2CB2125483F00F3232F /* DataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DataModel.xcdatamodel; sourceTree = "<group>"; };
 		A1E440AE2121285000D5A961 /* MoneyTracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MoneyTracker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A1E440B12121285000D5A961 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A1E440B32121285000D5A961 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -30,6 +34,8 @@
 		A1E440C521212A3A00D5A961 /* CalendarVars.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarVars.swift; sourceTree = "<group>"; };
 		A1E440C7212130D900D5A961 /* StoreViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreViewController.swift; sourceTree = "<group>"; };
 		A1E440C9212130FA00D5A961 /* ItemViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemViewController.swift; sourceTree = "<group>"; };
+		E39CD936219A4F31605F5B11 /* Pods-MoneyTracker.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MoneyTracker.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MoneyTracker/Pods-MoneyTracker.debug.xcconfig"; sourceTree = "<group>"; };
+		FAD2CFEA94B33517033FD368 /* Pods_MoneyTracker.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MoneyTracker.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -37,17 +43,37 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B57541A1D83F2A609E2CA4BA /* Pods_MoneyTracker.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0F6D2194F9C40A90833997B1 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				FAD2CFEA94B33517033FD368 /* Pods_MoneyTracker.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		98DF4DF6FBFE51BE9F7667CD /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				E39CD936219A4F31605F5B11 /* Pods-MoneyTracker.debug.xcconfig */,
+				1C93CCFEB3BCBB7E994E8FF5 /* Pods-MoneyTracker.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		A1E440A52121285000D5A961 = {
 			isa = PBXGroup;
 			children = (
 				A1E440B02121285000D5A961 /* MoneyTracker */,
 				A1E440AF2121285000D5A961 /* Products */,
+				98DF4DF6FBFE51BE9F7667CD /* Pods */,
+				0F6D2194F9C40A90833997B1 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -76,9 +102,9 @@
 			isa = PBXGroup;
 			children = (
 				A1E440B32121285000D5A961 /* ViewController.swift */,
+				A1E440C3212129EF00D5A961 /* DateCollectionViewCell.swift */,
 				A1E440C7212130D900D5A961 /* StoreViewController.swift */,
 				A1E440C9212130FA00D5A961 /* ItemViewController.swift */,
-				A1E440C3212129EF00D5A961 /* DateCollectionViewCell.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -86,6 +112,7 @@
 		A1E440CC212131EA00D5A961 /* Data Model */ = {
 			isa = PBXGroup;
 			children = (
+				A152C2CA2125483F00F3232F /* DataModel.xcdatamodeld */,
 				A1E440C521212A3A00D5A961 /* CalendarVars.swift */,
 			);
 			path = "Data Model";
@@ -115,9 +142,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = A1E440C02121285100D5A961 /* Build configuration list for PBXNativeTarget "MoneyTracker" */;
 			buildPhases = (
+				D1895D19A70744183B72FF35 /* [CP] Check Pods Manifest.lock */,
 				A1E440AA2121285000D5A961 /* Sources */,
 				A1E440AB2121285000D5A961 /* Frameworks */,
 				A1E440AC2121285000D5A961 /* Resources */,
+				A8E442A026B64C904AE3D8DA /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -174,11 +203,53 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		A8E442A026B64C904AE3D8DA /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-MoneyTracker/Pods-MoneyTracker-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Realm/Realm.framework",
+				"${BUILT_PRODUCTS_DIR}/RealmSwift/RealmSwift.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RealmSwift.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-MoneyTracker/Pods-MoneyTracker-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D1895D19A70744183B72FF35 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-MoneyTracker-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		A1E440AA2121285000D5A961 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A152C2CC2125483F00F3232F /* DataModel.xcdatamodeld in Sources */,
 				A1E440C8212130D900D5A961 /* StoreViewController.swift in Sources */,
 				A1E440B42121285000D5A961 /* ViewController.swift in Sources */,
 				A1E440C4212129EF00D5A961 /* DateCollectionViewCell.swift in Sources */,
@@ -326,6 +397,7 @@
 		};
 		A1E440C12121285100D5A961 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = E39CD936219A4F31605F5B11 /* Pods-MoneyTracker.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -344,6 +416,7 @@
 		};
 		A1E440C22121285100D5A961 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1C93CCFEB3BCBB7E994E8FF5 /* Pods-MoneyTracker.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -382,6 +455,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		A152C2CA2125483F00F3232F /* DataModel.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				A152C2CB2125483F00F3232F /* DataModel.xcdatamodel */,
+			);
+			currentVersion = A152C2CB2125483F00F3232F /* DataModel.xcdatamodel */;
+			path = DataModel.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = A1E440A62121285000D5A961 /* Project object */;
 }

@@ -7,18 +7,29 @@
 //
 
 import UIKit
+import CoreData
 
 class StoreViewController: UITableViewController {
     
-    var storeArray = ["Kasumi", "Seven Eleven", "Matsukiyo"]
+    var storeArray = [Store]()
+    
+    var selectedDate: Date? {
+        didSet{
+            loadStores()
+        }
+    }
+
+    let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        print(FileManager.default.urls(for: .documentDirectory, in: .userDomainMask))
 
     }
 
 
-    // MARK: - Table view data source
+    // MARK: - TableView Datasource Methods
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 
@@ -29,7 +40,7 @@ class StoreViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "StoreTableCell", for: indexPath)
-        cell.textLabel?.text = storeArray[indexPath.row]
+        cell.textLabel?.text = storeArray[indexPath.row].storeName
         
         return cell
         
@@ -40,22 +51,42 @@ class StoreViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
+        performSegue(withIdentifier: "goToItems", sender: self)
+        
+//        context.delete(storeArray[indexPath.row])
+//        storeArray.remove(at: indexPath.row)
+//
+//        saveStores()
+        
         tableView.deselectRow(at: indexPath, animated: true)
         
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        let destinationVC = segue.destination as! ItemViewController
+        
+        if let indexPath = tableView.indexPathForSelectedRow {
+            destinationVC.selectedStore = storeArray[indexPath.row]
+        }
     }
     
     
     // MARK: - Add New Stores
     
-    @IBAction func AddStoreButtonPressed(_ sender: UIBarButtonItem) {
+    @IBAction func addStoreButtonPressed(_ sender: UIBarButtonItem) {
         
         var textField = UITextField()
         
         let alert = UIAlertController(title: "Add New Store", message: "", preferredStyle: .alert)
-        let action = UIAlertAction(title: "Add Item", style: .default) { (action) in
+        let action = UIAlertAction(title: "Add Store", style: .default) { (action) in
             
-            self.storeArray.append(textField.text!)
-            self.tableView.reloadData()
+            let newStore = Store(context: self.context)
+            newStore.storeName = textField.text!
+            newStore.shoppingDate = self.selectedDate
+            
+            self.storeArray.append(newStore)
+            self.saveStores()
             
         }
         
@@ -71,6 +102,33 @@ class StoreViewController: UITableViewController {
         
         present(alert, animated: true, completion: nil)
         
+    }
+    
+    
+    // MARK: - Model Manupulation Methods
+    
+    func saveStores() {
+
+        do {
+            try context.save()
+        } catch {
+            print("Error saving context, \(error)")
+        }
+        
+        tableView.reloadData()
+    }
+    
+    
+    func loadStores(with request: NSFetchRequest<Store> = Store.fetchRequest()) {
+        
+        let predicate = NSPredicate(format: "Store.shoppingDate MATCHES %@", selectedDate! as CVarArg)
+        request.predicate = predicate
+        
+        do {
+            storeArray = try context.fetch(request)
+        } catch {
+            print("Error fetching data from context \(error)")
+        }
     }
     
 

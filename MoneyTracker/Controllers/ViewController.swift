@@ -27,6 +27,9 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     
     var dayCounter = 0
     
+    var selectedDate: String = ""
+    
+    
 //    var highlightDate = -1
     
     
@@ -228,7 +231,20 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
 //        highlightDate = indexPath.row
 //        calendarCollectionView.reloadData()
         
+        selectedDate = "\(year)-\(month)-\(indexPath.row - positionIndex + 1)"
+        
         performSegue(withIdentifier: "goToStores", sender: self)
+        
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        let destinationVC = segue.destination as! StoreViewController
+        
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-M-d"
+        let date = dateFormatter.date(from: selectedDate)
+        destinationVC.selectedDate = date
         
     }
     
