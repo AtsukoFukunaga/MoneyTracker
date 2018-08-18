@@ -38,7 +38,7 @@ class StoreViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "StoreTableCell", for: indexPath)
-        cell.textLabel?.text = storeArray?[indexPath.row].storeName ?? "No stores added yet"
+        cell.textLabel?.text = storeArray?[indexPath.row].storeName ?? ""
         
         return cell
         

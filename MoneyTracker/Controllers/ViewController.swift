@@ -216,7 +216,9 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
-        performSegue(withIdentifier: "goToStores", sender: self)
+        if (indexPath.row - positionIndex + 1) > 0 {
+            performSegue(withIdentifier: "goToStores", sender: self)
+        }
         
     }
     
@@ -228,7 +230,6 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
 
             if (indexPath.row - positionIndex + 1) > 0 {
                 selectedDate = "\(year)-\(month)-\(indexPath.row - positionIndex + 1)"
-                print(selectedDate)
                 destinationVC.selectedDate = selectedDate
             }
         }
