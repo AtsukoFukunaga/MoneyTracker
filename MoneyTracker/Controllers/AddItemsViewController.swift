@@ -8,7 +8,10 @@
 
 import UIKit
 
-class AddItemsViewController: UIViewController {
+class AddItemsViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
+    
+    let categories: Array = ["Personal", "Work", "Auto"]
+    let subcategories: Array = ["Shopping", "Computer", "Dining", "Field", "Travel", "Gas", "Maintainance"]
 
     @IBOutlet weak var categoryPicker: UIPickerView!
     @IBOutlet weak var subcategoryPicker: UIPickerView!
@@ -17,14 +20,36 @@ class AddItemsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        categoryPicker.delegate = self
+        categoryPicker.dataSource = self
+        
+        subcategoryPicker.delegate = self
+        subcategoryPicker.dataSource = self
+        
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    // MARK: - PickerView Datasource Methods
+    
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
     }
     
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        if pickerView.tag == 1 {
+            return categories.count
+        } else {
+            return subcategories.count
+        }
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        if pickerView.tag == 1 {
+            return categories[row]
+        } else {
+            return subcategories[row]
+        }
+    }
+
 
     // MARK: - Navigation
 
