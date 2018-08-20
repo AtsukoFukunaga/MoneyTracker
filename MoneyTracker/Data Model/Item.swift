@@ -11,9 +11,10 @@ import RealmSwift
 
 class Item: Object {
     
+    @objc dynamic var category: String = ""
+    @objc dynamic var subcategory: String = ""
     @objc dynamic var item: String = ""
-    @objc dynamic var expense: Int = 0
-    @objc dynamic var income: Int = 0
+    @objc dynamic var amount: Int = 0
     @objc dynamic var dateCreated: Date?
     var parentCategory = LinkingObjects(fromType: Store.self, property: "items")
     

@@ -13,6 +13,7 @@ class ItemViewController: UITableViewController {
     
     var storeItems: Results<Item>?
     let realm = try! Realm()
+    var newItem = Item()
     
     var selectedDate: String?
     
@@ -38,17 +39,13 @@ class ItemViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: "ItemTableCell", for: indexPath)
         
+        var cell = tableView.dequeueReusableCell(withIdentifier: "ItemTableCell", for: indexPath)
+        cell = UITableViewCell(style: .value1, reuseIdentifier: "ItemTableCell")
+
         if let item = storeItems?[indexPath.row] {
             cell.textLabel?.text = item.item
-            var amount: Int = 0
-            if item.expense != 0 {
-                amount = item.expense
-            } else {
-                amount = item.income
-            }
-            cell.detailTextLabel?.text = String(amount)
+            cell.detailTextLabel?.text = String(item.amount)
         }
         
         return cell
@@ -68,51 +65,19 @@ class ItemViewController: UITableViewController {
     
     @IBAction func retreiveNewItem(segue: UIStoryboardSegue) {
         
+        if let currentStore = selectedStore {
+            do {
+                try realm.write {
+                    currentStore.items.append(newItem)
+                }
+            } catch {
+                print("Error saving new items, \(error)")
+            }
+        }
+        print("tableView.reloadData()")
+        tableView.reloadData()
+        newItem = Item()
     }
-
-//    @IBAction func addButtonPressed(_ sender: UIBarButtonItem) {
-//
-////        let alert = UIAlertController(title: "Add New Item", message: "", preferredStyle: .alert)
-////        let action = UIAlertAction(title: "Add Item", style: .default) { (action) in
-////
-////            if let currentStore = self.selectedStore {
-////                do {
-////                    try self.realm.write {
-////                        let newItem = Item()
-////                        newItem.dateCreated = Date()
-////                        newItem.item = alert.textFields![0].text!
-////                        newItem.expense = Int(alert.textFields![1].text!)! * -1
-////                        newItem.income = Int(alert.textFields![2].text!)!
-////                        currentStore.items.append(newItem)
-////                    }
-////                } catch {
-////                    print("Error saving new items, \(error)")
-////                }
-////            }
-////            
-////            self.tableView.reloadData()
-////
-////        }
-////
-////        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
-////
-////        alert.addTextField { (alertTextField: UITextField) in
-////            alertTextField.placeholder = "Create new item"
-////        }
-////        alert.addTextField { (alertTextField: UITextField) in
-////            alertTextField.keyboardType = .numberPad
-////            alertTextField.placeholder = "0"
-////        }
-////        alert.addTextField { (alertTextField: UITextField) in
-////            alertTextField.keyboardType = .numberPad
-////            alertTextField.placeholder = "0"
-////        }
-////
-////        alert.addAction(action)
-////        alert.addAction(cancelAction)
-////
-////        present(alert, animated: true, completion: nil)
-//    }
     
     
     // MARK: - Data Manipulation Methods
